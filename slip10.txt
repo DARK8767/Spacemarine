@@ -1,0 +1,113 @@
+Q1. Write a program to accept a number from user. Check whether number is prime or not.
+[10 Marks
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class PrimeNumberCheck {
+    public static void main(String[] args) {
+        try {
+            // Use BufferedReader to accept input from the user
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Enter a number: ");
+            int number = Integer.parseInt(reader.readLine());
+
+            // Check if the number is prime
+            if (isPrime(number)) {
+                System.out.println(number + " is a prime number.");
+            } else {
+                System.out.println(number + " is not a prime number.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("An I/O error occurred: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+        }
+    }
+
+    // Method to check if a number is prime
+    static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false; // 0 and 1 are not prime numbers
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false; // Found a divisor, so not prime
+            }
+        }
+        return true; // No divisors found, so it is prime
+    }
+}
+
+
+Q2. Define a class SavingAccount (acno, name, balance). Define appropriate operations as,
+withdraw(), deposit(), and viewbalance(). The minimum balance must be 500. Create an object
+and perform operation. Raise user defined ―InsufficientFundException when balance is not
+sufficient for withdraw operation. [20 Marks]
+// Custom Exception for Insufficient Funds
+class InsufficientFundException extends Exception {
+    public InsufficientFundException(String message) {
+        super(message);
+    }
+}
+
+// Class representing a saving account
+class SavingAccount {
+    private int acno; // Account Number
+    private String name; // Account Holder's Name
+    private double balance; // Account Balance
+
+    // Constructor to initialize account details
+    public SavingAccount(int acno, String name, double initialBalance) {
+        this.acno = acno;
+        this.name = name;
+        this.balance = initialBalance;
+    }
+
+    // Method to withdraw money from the account
+    public void withdraw(double amount) throws InsufficientFundException {
+        if (balance - amount < 500) { // Check if the balance would drop below minimum
+            throw new InsufficientFundException("Insufficient funds. Minimum balance must be 500.");
+        }
+        balance -= amount; // Deduct amount from balance
+        System.out.println("Withdrawal successful: " + amount);
+    }
+
+    // Method to deposit money into the account
+    public void deposit(double amount) {
+        balance += amount; // Add amount to balance
+        System.out.println("Deposit successful: " + amount);
+    }
+
+    // Method to view the account balance
+    public void viewBalance() {
+        System.out.println("Current balance: " + balance);
+    }
+}
+
+public class SavingAccountDemo {
+    public static void main(String[] args) {
+        // Create a SavingAccount object
+        SavingAccount account = new SavingAccount(101, "John Doe", 1000);
+
+        try {
+            // Perform operations
+            account.viewBalance(); // View initial balance
+            
+            account.deposit(500); // Deposit amount
+            account.viewBalance(); // View balance after deposit
+
+            account.withdraw(800); // Withdraw amount
+            account.viewBalance(); // View balance after withdrawal
+            
+            account.withdraw(300); // Attempt to withdraw an amount that would drop balance below minimum
+            
+        } catch (InsufficientFundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+

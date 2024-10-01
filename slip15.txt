@@ -1,0 +1,84 @@
+Q1. Construct a Linked List having names of Fruits: Apple, Banana, Guava and Orange. Display
+the contents of the List in reverse order using an appropriate interface. [10 Marks]
+
+import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.Stack;
+
+public class FruitList {
+    public static void main(String[] args) {
+        // Create a linked list to hold fruit names
+        LinkedList<String> fruits = new LinkedList<>();
+
+        // Add fruit names to the list
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Guava");
+        fruits.add("Orange");
+
+        // Display the contents of the list in reverse order using a stack
+        System.out.println("Fruits in reverse order:");
+        Stack<String> stack = new Stack<>();
+
+        // Push all fruit names onto the stack
+        for (String fruit : fruits) {
+            stack.push(fruit);
+        }
+
+        // Pop elements from the stack to display in reverse order
+        while (!stack.isEmpty()) {
+            System.out.println(stack.pop());
+        }
+    }
+}
+
+
+Q2. Write a program to create a super class Employee (members – name, salary). Derive a sub- class
+as Developer (member – projectname). Create object of Developer and display the detailsof it.
+
+// Superclass representing an Employee
+class Employee {
+    protected String name; // Employee name
+    protected double salary; // Employee salary
+
+    // Constructor to initialize name and salary
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    // Method to display employee details
+    public void displayDetails() {
+        System.out.println("Employee Name: " + name);
+        System.out.println("Salary: " + salary);
+    }
+}
+
+// Subclass representing a Programmer
+class Programmer extends Employee {
+    private String progLanguage; // Programming language
+
+    // Constructor to initialize name, salary, and programming language
+    public Programmer(String name, double salary, String progLanguage) {
+        super(name, salary); // Call to Employee constructor
+        this.progLanguage = progLanguage;
+    }
+
+    // Method to display programmer details
+    @Override
+    public void displayDetails() {
+        super.displayDetails(); // Call to Employee's display method
+        System.out.println("Programming Language: " + progLanguage);
+    }
+}
+
+public class EmployeeDemo {
+    public static void main(String[] args) {
+        // Create an object of Programmer
+        Programmer programmer = new Programmer("John Doe", 85000, "Java");
+
+        // Display the details of the programmer
+        programmer.displayDetails();
+    }
+}
+

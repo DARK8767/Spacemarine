@@ -1,0 +1,79 @@
+Q1. Write a program create class as MyDate with dd,mm,yy as data members. Write
+parameterized constructor. Display the date in dd-mm-yy format. (Use this keyword)
+[10 Marks]
+
+// Class representing a date
+class MyDate {
+    private int dd; // Day
+    private int mm; // Month
+    private int yy; // Year
+
+    // Parameterized constructor
+    public MyDate(int dd, int mm, int yy) {
+        this.dd = dd; // Using 'this' to refer to the instance variable
+        this.mm = mm;
+        this.yy = yy;
+    }
+
+    // Method to display the date in dd-mm-yy format
+    public void displayDate() {
+        System.out.println("Date: " + dd + "-" + mm + "-" + yy);
+    }
+}
+
+public class MyDateDemo {
+    public static void main(String[] args) {
+        // Create a MyDate object using the parameterized constructor
+        MyDate date = new MyDate(25, 12, 2024);
+        
+        // Display the date
+        date.displayDate();
+    }
+}
+
+
+Q2. Create an abstract class Shape with methods area & volume. Derive a class Sphere (radius).
+Calculate and display area and volume. [20 Marks]
+
+// Abstract class representing a shape
+abstract class Shape {
+    // Abstract method to calculate area
+    abstract double area();
+    
+    // Abstract method to calculate volume
+    abstract double volume();
+}
+
+// Class representing a sphere that extends Shape
+class Sphere extends Shape {
+    private double radius;
+
+    // Constructor to initialize the radius
+    public Sphere(double radius) {
+        this.radius = radius;
+    }
+
+    // Implementing the area method for the sphere
+    @Override
+    double area() {
+        return 4 * Math.PI * radius * radius; // Surface area of the sphere
+    }
+
+    // Implementing the volume method for the sphere
+    @Override
+    double volume() {
+        return (4.0 / 3.0) * Math.PI * radius * radius * radius; // Volume of the sphere
+    }
+}
+
+public class ShapeDemo {
+    public static void main(String[] args) {
+        // Create a Sphere object
+        Sphere sphere = new Sphere(5.0); // Radius = 5.0
+        
+        // Calculate and display area and volume
+        System.out.println("Area of the sphere: " + sphere.area());
+        System.out.println("Volume of the sphere: " + sphere.volume());
+    }
+}
+

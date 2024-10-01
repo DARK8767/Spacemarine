@@ -1,0 +1,99 @@
+Q1. Define a class MyNumber having one private integer data member. Write a parameterized
+constructor to initialize to a value. Write isOdd() to check given number is odd or not. Use command
+line argument to pass a value to the object. [10 Marks]
+
+public class MyNumber {
+    // Private integer data member
+    private int number;
+
+    // Parameterized constructor to initialize the number
+    public MyNumber(int number) {
+        this.number = number;
+    }
+
+    // Method to check if the number is odd
+    public boolean isOdd() {
+        return number % 2 != 0; // True if the remainder is not 0 when divided by 2
+    }
+
+    public static void main(String[] args) {
+        if (args.length > 0) {
+            try {
+                // Parse the command-line argument to an integer
+                int num = Integer.parseInt(args[0]);
+
+                // Create an instance of MyNumber and pass the number
+                MyNumber myNum = new MyNumber(num);
+
+                // Display the number and check if it's odd
+                System.out.println("The number is: " + num);
+                if (myNum.isOdd()) {
+                    System.out.println(num + " is an odd number.");
+                } else {
+                    System.out.println(num + " is an even number.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please provide a valid integer as a command-line argument.");
+            }
+        } else {
+            System.out.println("Please provide a number as a command-line argument.");
+        }
+    }
+}
+
+
+Q2. Define a class Student with attributes rollno and name. Define default and parameterized
+constructor. Keep the count of Objects created. Create objects using parameterized constructor and
+Display the object count after each object is created
+
+public class Student {
+    // Instance attributes for each student
+    private int rollno;
+    private String name;
+
+    // Static variable to keep count of Student objects
+    private static int count = 0;
+
+    // Default constructor
+    public Student() {
+        this.rollno = 0;
+        this.name = "Unknown";
+        count++; // Increment the count when a new object is created
+        displayCount(); // Display the count
+    }
+
+    // Parameterized constructor
+    public Student(int rollno, String name) {
+        this.rollno = rollno;
+        this.name = name;
+        count++; // Increment the count when a new object is created
+        displayCount(); // Display the count
+    }
+
+    // Method to display the current count of Student objects
+    public void displayCount() {
+        System.out.println("Total number of Student objects created: " + count);
+    }
+
+    // Method to display student details
+    public void displayDetails() {
+        System.out.println("Roll No: " + rollno);
+        System.out.println("Name: " + name);
+    }
+
+    public static void main(String[] args) {
+        // Create objects using the parameterized constructor
+        Student student1 = new Student(1, "John Doe");
+        student1.displayDetails();
+
+        Student student2 = new Student(2, "Alice Smith");
+        student2.displayDetails();
+
+        Student student3 = new Student(3, "Bob Johnson");
+        student3.displayDetails();
+
+        // The count should now reflect 3 objects created
+        System.out.println("Final count of Student objects: " + count);
+    }
+}
+

@@ -1,0 +1,107 @@
+Q1. Create a Hash table containing Employee name and Salary. Display the details of the hash
+table. [10 Marks]
+
+import java.util.Hashtable;
+import java.util.Scanner;
+
+public class EmployeeHashTable {
+    public static void main(String[] args) {
+        // Create a Hashtable to store employee name and salary
+        Hashtable<String, Double> employees = new Hashtable<>();
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept the number of employees from the user
+        System.out.print("Enter the number of employees: ");
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        // Accept employee name and salary details and store them in the Hashtable
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for Employee " + (i + 1) + ":");
+            System.out.print("Enter Employee Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Enter Employee Salary: ");
+            double salary = scanner.nextDouble();
+            scanner.nextLine(); // Consume newline character
+
+            // Add the employee details to the Hashtable
+            employees.put(name, salary);
+        }
+
+        // Display the details of the Hashtable
+        System.out.println("\nEmployee Details in the HashTable:");
+        System.out.println("Name\t\tSalary");
+        System.out.println("----------------------------");
+        for (String key : employees.keySet()) {
+            System.out.println(key + "\t\t" + employees.get(key));
+        }
+
+        scanner.close();
+    }
+}
+
+
+Q2. Define a class student having rollno, name and percentage. Define Default and
+parameterized constructor. Accept the 5 student details and display it. (Use this keyword)
+
+import java.util.Scanner;
+
+// Class to represent a Student
+class Student {
+    int rollno;
+    String name;
+    double percentage;
+
+    // Default Constructor
+    Student() {
+        this.rollno = 0;
+        this.name = "Unknown";
+        this.percentage = 0.0;
+    }
+
+    // Parameterized Constructor using `this` keyword
+    Student(int rollno, String name, double percentage) {
+        this.rollno = rollno;
+        this.name = name;
+        this.percentage = percentage;
+    }
+
+    // Method to display student details
+    void display() {
+        System.out.println("Roll No: " + this.rollno + "\tName: " + this.name + "\tPercentage: " + this.percentage);
+    }
+}
+
+public class StudentDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Student[] students = new Student[5];  // Array to hold 5 Student objects
+
+        // Accept details of 5 students from the user
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Enter details for Student " + (i + 1) + ":");
+            
+            System.out.print("Enter Roll Number: ");
+            int rollno = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+            
+            System.out.print("Enter Name: ");
+            String name = scanner.nextLine();
+            
+            System.out.print("Enter Percentage: ");
+            double percentage = scanner.nextDouble();
+
+            // Create a new Student object using the parameterized constructor
+            students[i] = new Student(rollno, name, percentage);
+        }
+
+        // Display details of all students
+        System.out.println("\nDetails of Students:");
+        for (Student student : students) {
+            student.display();
+        }
+
+        scanner.close();
+    }
+}

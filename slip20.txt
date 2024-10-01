@@ -1,0 +1,92 @@
+Q1. Write a program to accept 3 numbers using command line argument. Sort and display the
+numbers. [10 Marks]
+
+import java.util.Arrays;
+
+public class SortNumbers {
+    public static void main(String[] args) {
+        // Check if the correct number of arguments are provided
+        if (args.length != 3) {
+            System.out.println("Please provide exactly 3 numbers as command-line arguments.");
+            return;
+        }
+
+        try {
+            // Parse command-line arguments to integers
+            int[] numbers = new int[3];
+            for (int i = 0; i < 3; i++) {
+                numbers[i] = Integer.parseInt(args[i]);
+            }
+
+            // Sort the array
+            Arrays.sort(numbers);
+
+            // Display the sorted numbers
+            System.out.println("Sorted numbers in ascending order:");
+            for (int num : numbers) {
+                System.out.print(num + " ");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please ensure all three arguments are integers.");
+        }
+    }
+}
+
+
+Q2. Create an employee class (id,name,deptname,salary). Define a default and parameterized
+constructor. Use ‘this’ keyword to initialize instance variables. Keep a count of objects created.
+Create objects using parameterized constructor and display the object count after each object is
+created. Also display the contents of each object. [20 Marks]
+
+public class Employee {
+    // Class-level variables (attributes)
+    private int id;
+    private String name;
+    private String deptname;
+    private double salary;
+
+    // Static variable to keep track of the number of objects created
+    private static int objectCount = 0;
+
+    // Default constructor
+    public Employee() {
+        this.id = 0;
+        this.name = "Not Specified";
+        this.deptname = "Not Specified";
+        this.salary = 0.0;
+    }
+
+    // Parameterized constructor using 'this' keyword to initialize instance variables
+    public Employee(int id, String name, String deptname, double salary) {
+        this.id = id;
+        this.name = name;
+        this.deptname = deptname;
+        this.salary = salary;
+
+        // Increment the object count each time an object is created
+        objectCount++;
+        System.out.println("Employee object count: " + objectCount);
+    }
+
+    // Method to display the details of an employee
+    public void displayEmployeeDetails() {
+        System.out.println("Employee ID: " + id);
+        System.out.println("Employee Name: " + name);
+        System.out.println("Department Name: " + deptname);
+        System.out.println("Employee Salary: " + salary);
+        System.out.println("-------------------------------");
+    }
+
+    public static void main(String[] args) {
+        // Creating Employee objects using the parameterized constructor
+        Employee emp1 = new Employee(101, "John Doe", "IT", 55000.0);
+        emp1.displayEmployeeDetails(); // Display details for emp1
+
+        Employee emp2 = new Employee(102, "Alice Smith", "HR", 60000.0);
+        emp2.displayEmployeeDetails(); // Display details for emp2
+
+        Employee emp3 = new Employee(103, "Bob Johnson", "Finance", 65000.0);
+        emp3.displayEmployeeDetails(); // Display details for emp3
+    }
+}
+

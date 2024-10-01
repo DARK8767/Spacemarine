@@ -1,0 +1,108 @@
+Q1. Accept 'n' integers from the user and store them in a collection. Display them in the sorted order. 
+The collection should not accept duplicate elements. (Use a suitable collection). Search for a
+particular element using predefined search method in the Collection framework. [10 Marks]
+
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class IntegerCollection {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Use TreeSet to store integers in sorted order and avoid duplicates
+        Set<Integer> numbers = new TreeSet<>();
+
+        System.out.print("Enter the number of elements to store: ");
+        int n = scanner.nextInt();
+
+        // Accept 'n' integers from the user
+        System.out.println("Enter " + n + " integers:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter integer " + (i + 1) + ": ");
+            int num = scanner.nextInt();
+            numbers.add(num);  // TreeSet handles duplicates automatically
+        }
+
+        // Display the sorted elements
+        System.out.println("Elements in the sorted order: " + numbers);
+
+        // Search for a particular element
+        System.out.print("Enter an element to search: ");
+        int searchElement = scanner.nextInt();
+        if (numbers.contains(searchElement)) {
+            System.out.println("Element " + searchElement + " found in the collection.");
+        } else {
+            System.out.println("Element " + searchElement + " not found in the collection.");
+        }
+
+        scanner.close();
+    }
+}
+
+
+Q2. Write a program which define class Employee with data member as id, name and salary Store 
+the information of 'n' employees and Display the name of employee having maximum salary (Use 
+array of object).
+
+import java.util.Scanner;
+
+// Class to represent an Employee
+class Employee {
+    int id;
+    String name;
+    double salary;
+
+    // Constructor to initialize Employee attributes
+    Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+}
+
+public class EmployeeDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter the number of employees: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+
+        // Array to store 'n' Employee objects
+        Employee[] employees = new Employee[n];
+
+        // Loop to accept details of 'n' employees from the user
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for Employee " + (i + 1) + ":");
+            System.out.print("Enter Employee ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();  // Consume the newline character
+            
+            System.out.print("Enter Employee Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Enter Employee Salary: ");
+            double salary = scanner.nextDouble();
+
+            // Create a new Employee object and store it in the array
+            employees[i] = new Employee(id, name, salary);
+        }
+
+        // Find the employee with the maximum salary
+        double maxSalary = employees[0].salary;
+        String employeeWithMaxSalary = employees[0].name;
+
+        for (int i = 1; i < employees.length; i++) {
+            if (employees[i].salary > maxSalary) {
+                maxSalary = employees[i].salary;
+                employeeWithMaxSalary = employees[i].name;
+            }
+        }
+
+        // Display the name of the employee with the maximum salary
+        System.out.println("The employee with the maximum salary is: " + employeeWithMaxSalary);
+
+        scanner.close();
+    }
+}

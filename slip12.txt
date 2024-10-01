@@ -1,0 +1,81 @@
+Q1. Create a package named “Series” having a class to print series of Square of numbers. Write a
+program to generate “n” terms series. [10 Marks]
+
+Step 1: Create the Package
+
+package Series; // Declare the package
+
+// Class to print series of squares
+public class SquareSeries {
+    // Method to generate n terms of the series of squares
+    public void printSquareSeries(int n) {
+        System.out.print("Series of squares: ");
+        for (int i = 1; i <= n; i++) {
+            System.out.print(i * i + " "); // Print square of i
+        }
+        System.out.println(); // New line after the series
+    }
+}
+
+Step 2: Write the Main Program
+MainProgram.java
+
+import Series.SquareSeries; // Importing the SquareSeries class from the Series package
+import java.util.Scanner;
+
+public class MainProgram {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of terms (n): ");
+        int n = scanner.nextInt();
+
+        // Create an instance of SquareSeries
+        SquareSeries series = new SquareSeries();
+        series.printSquareSeries(n); // Call method to print square series
+
+        scanner.close(); // Close the scanner
+    }
+}
+
+
+Q2. Create an abstract class Shape with methods area & volume. Derive a class Cylinder (radius,
+height). Calculate area and volume
+
+// Abstract Shape class
+abstract class Shape {
+    abstract double area();
+    abstract double volume();
+}
+
+// Concrete Cylinder class (inherits from Shape)
+class Cylinder extends Shape {
+    private double radius;
+    private double height;
+
+    public Cylinder(double radius, double height) {
+        this.radius = radius;
+        this.height = height;
+    }
+
+    @Override
+    double area() {
+        // Surface area of a cylinder: 2πr(r + h)
+        return 2 * Math.PI * radius * (radius + height);
+    }
+
+    @Override
+    double volume() {
+        // Volume of a cylinder: πr^2h
+        return Math.PI * Math.pow(radius, 2) * height;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Example usage
+        Cylinder cylinder = new Cylinder(3.0, 5.0);
+        System.out.println("Cylinder Surface Area: " + cylinder.area());
+        System.out.println("Cylinder Volume: " + cylinder.volume());
+    }
+}
