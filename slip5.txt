@@ -1,0 +1,122 @@
+Q1. Write a program to accept a number from the user, if number is zero then throw user defined
+exception ―Number is 0, otherwise display factorial of a number. 
+
+import java.util.Scanner;
+
+// Custom Exception for when the number is zero
+class ZeroNumberException extends Exception {
+    public ZeroNumberException(String message) {
+        super(message);
+    }
+}
+
+public class FactorialCalculator {
+    // Method to calculate factorial of a number
+    public static long factorial(int num) {
+        long fact = 1;
+        for (int i = 1; i <= num; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        try {
+            // Check if the number is zero and throw a custom exception
+            if (number == 0) {
+                throw new ZeroNumberException("Number is 0");
+            }
+            
+            // Calculate factorial for positive numbers
+            long result = factorial(number);
+            System.out.println("The factorial of " + number + " is: " + result);
+        } catch (ZeroNumberException e) {
+            System.out.println("Exception: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+
+        scanner.close();
+    }
+}
+
+
+Q2. b)Write a JDBC program to insert the records into the table Employee (ID, name, salary) using 
+PreparedStatement interface. Accept details of Employees from user. [20 Marks]
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class EmployeeJDBC {
+    public static void main(String[] args) {
+        // Database credentials and URL
+        String url = "jdbc:postgresql://localhost:5432/your_database";
+        String user = "your_username";
+        String password = "your_password";
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            // Register the PostgreSQL JDBC driver
+            Class.forName("org.postgresql.Driver");
+
+            // Establish the connection
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to the database successfully!");
+
+            // SQL query for inserting records into the Employee table
+            String sql = "INSERT INTO Employee (ID, name, salary) VALUES (?, ?, ?)";
+            
+            // Create a PreparedStatement object
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Accept multiple employee records from the user
+            System.out.print("Enter the number of employees to insert: ");
+            int numberOfEmployees = scanner.nextInt();
+
+            for (int i = 1; i <= numberOfEmployees; i++) {
+                System.out.println("Enter details for Employee " + i + ":");
+                
+                // Accept employee ID
+                System.out.print("Enter ID: ");
+                int id = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                // Accept employee name
+                System.out.print("Enter Name: ");
+                String name = scanner.nextLine();
+
+                // Accept employee salary
+                System.out.print("Enter Salary: ");
+                double salary = scanner.nextDouble();
+
+                // Set parameters for the PreparedStatement
+                preparedStatement.setInt(1, id);
+                preparedStatement.setString(2, name);
+                preparedStatement.setDouble(3, salary);
+
+                // Execute the insertion
+                preparedStatement.executeUpdate();
+                System.out.println("Employee " + i + " inserted successfully.");
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("PostgreSQL JDBC Driver not found. Include it in your library path.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close the PreparedStatement and Connection
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e)

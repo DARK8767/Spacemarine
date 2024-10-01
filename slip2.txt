@@ -1,0 +1,65 @@
+Q1. Write a program to accept ‘n’ integers from the user & store them in an Array List collection. 
+Display the elements of Array List. [10 Marks]
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class IntegerArrayList {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> numbers = new ArrayList<>();
+        
+        System.out.print("Enter the number of integers to store: ");
+        int n = scanner.nextInt();
+
+        System.out.println("Enter " + n + " integers:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter integer " + (i + 1) + ": ");
+            int num = scanner.nextInt();
+            numbers.add(num);
+        }
+
+        System.out.println("Elements of ArrayList: " + numbers);
+
+        scanner.close();
+    }
+}
+
+Q2.b) Write a program to accept Doctor Name from the user and check whether it is valid or not.(It 
+should not contain digits and special symbol) If it is not valid then throw user defined Exception -
+Name is Invalid -- otherwise display the name. [20 Marks
+
+import java.util.Scanner;
+
+// Custom exception for invalid names
+class InvalidNameException extends Exception {
+    public InvalidNameException(String message) {
+        super(message);
+    }
+}
+
+public class DoctorNameValidation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter Doctor Name: ");
+        String doctorName = scanner.nextLine();
+
+        try {
+            validateDoctorName(doctorName);
+            System.out.println("Doctor Name is Valid: " + doctorName);
+        } catch (InvalidNameException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+
+        scanner.close();
+    }
+
+    // Method to validate doctor name
+    public static void validateDoctorName(String name) throws InvalidNameException {
+        // Regex to check if the name contains only letters and spaces
+        if (!name.matches("[a-zA-Z ]+")) {
+            throw new InvalidNameException("Name is Invalid -- It should not contain digits or special symbols");
+        }
+    }
+}
+

@@ -1,0 +1,79 @@
+Q1. Program to accept the user's name, convert it to uppercase, and display a greeting message.
+
+import java.util.Scanner;
+
+public class GreetUser {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Accept the user's name
+        System.out.print("Enter your name: ");
+        String name = scanner.nextLine();
+        
+        // Convert the name to uppercase
+        String upperCaseName = name.toUpperCase();
+        
+        // Display greeting message
+        System.out.println("Hello, " + upperCaseName + ", nice to meet you!");
+
+        scanner.close();
+    }
+}
+
+
+Q2.a) Program to define a Product class, store information of 5 products, and display the name of the product with the minimum price.
+
+
+import java.util.Scanner;
+
+// Class representing a Product with id, name, and price attributes
+class Product {
+    int id;
+    String name;
+    double price;
+
+    // Constructor to initialize the product attributes
+    Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+}
+
+public class ProductDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Product[] products = new Product[5]; // Array to hold 5 Product objects
+
+        // Loop to accept details of 5 products from the user
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Enter details of Product " + (i + 1) + ":");
+            System.out.print("Enter Product ID: ");
+            int id = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter Product Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter Product Price: ");
+            double price = scanner.nextDouble();
+            
+            // Create a new Product object and store it in the array
+            products[i] = new Product(id, name, price);
+        }
+
+        // Find the product with the minimum price
+        double minPrice = products[0].price;
+        String minPriceProductName = products[0].name;
+
+        for (int i = 1; i < products.length; i++) {
+            if (products[i].price < minPrice) {
+                minPrice = products[i].price;
+                minPriceProductName = products[i].name;
+            }
+        }
+
+        // Display the name of the product with the minimum price
+        System.out.println("The product with the minimum price is: " + minPriceProductName);
+
+        scanner.close();
+    }
+}
